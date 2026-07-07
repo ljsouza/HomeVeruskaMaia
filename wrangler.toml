@@ -1,0 +1,8 @@
+name = "homeveruskamaia"
+compatibility_date = "2025-01-01"
+
+# Worker de assets estáticos: serve a pasta dist/ diretamente.
+# "/" serve index.html; caminhos desconhecidos retornam 404.
+[assets]
+directory = "./dist"
+not_found_handling = "none"
