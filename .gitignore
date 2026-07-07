@@ -1,0 +1,9 @@
+node_modules/
+dist/
+scratch-lh/
+.omc/
+.DS_Store
+*.log
+
+# Artefatos do design tool (não necessários para o site)
+Homepage para psicóloga Veruska.zip

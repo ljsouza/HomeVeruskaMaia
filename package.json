@@ -1,0 +1,23 @@
+{
+  "name": "psicoafetiva",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site institucional da psicóloga Veruska Martins Maia — psicoafetiva.com.br",
+  "type": "module",
+  "scripts": {
+    "build:images": "node scripts/optimize-images.mjs",
+    "build:site": "node scripts/build.mjs",
+    "build": "npm run build:images && npm run build:site",
+    "clean": "rm -rf dist",
+    "serve": "node scripts/serve.mjs",
+    "dev": "npm run build && npm run serve"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.2.8",
+    "@fontsource-variable/playfair-display": "^5.2.8",
+    "sharp": "^0.33.5"
+  }
+}
