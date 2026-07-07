@@ -9,7 +9,7 @@ Node — pensado para **Lighthouse 100** e publicação no **Cloudflare Pages**.
 - **Fonte única de verdade:** `src/` (HTML) + `src/assets/` (CSS/JS) + `src-images/` (fotos originais)
 - **Build (`scripts/`):** otimização de imagens (AVIF/WebP/JPG responsivos via `sharp`),
   inline de CSS/JS no HTML, geração de ícones, OG image, `robots.txt`, `sitemap.xml`,
-  `site.webmanifest`, `_redirects` e `_headers`
+  `site.webmanifest` e `_headers`
 - **Saída:** `dist/` (é o que o Cloudflare publica) — não versionado
 
 ## Comandos
@@ -59,7 +59,8 @@ Repositório: `github.com/ljsouza/HomeVeruskaMaia`
    - **Node version:** 20 ou superior (variável `NODE_VERSION=20` se necessário)
 3. Deploy. Cada `git push` na branch `main` republica automaticamente.
 4. **Custom domains:** adicionar `psicoafetiva.com.br` e `www.psicoafetiva.com.br`
-   (o `www` redireciona para a raiz via `_redirects`).
+   (o `www` → raiz é feito por uma Redirect Rule no nível da zona, pois o
+   `_redirects` do Cloudflare não redireciona por hostname).
 
 Detalhes de DNS (registro.br → nameservers Cloudflare) em
 [`handoff_psicoafetiva/README.md`](handoff_psicoafetiva/README.md).

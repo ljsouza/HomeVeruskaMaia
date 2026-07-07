@@ -101,8 +101,8 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 `;
 await writeFile(join(DIST, 'sitemap.xml'), sitemap);
 
-const redirects = `https://www.psicoafetiva.com.br/* https://psicoafetiva.com.br/:splat 301!\n`;
-await writeFile(join(DIST, '_redirects'), redirects);
+// Obs.: o redirect www → raiz NÃO é feito por _redirects (só aceita caminhos
+// relativos, não hostname). É configurado como Redirect Rule no nível da zona.
 
 const headers = `/*
   X-Content-Type-Options: nosniff
@@ -120,7 +120,7 @@ const headers = `/*
   Cache-Control: public, max-age=604800
 `;
 await writeFile(join(DIST, '_headers'), headers);
-console.log('✓ robots, sitemap, manifest, _redirects, _headers');
+console.log('✓ robots, sitemap, manifest, _headers');
 
 /* ---- 5. index.html com CSS/JS inline --------------------------------- */
 function minifyCss(css) {
