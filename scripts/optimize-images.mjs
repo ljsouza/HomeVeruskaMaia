@@ -19,6 +19,8 @@ const IMAGES = [
   { name: 'sobre', widths: [420, 640, 840] },
   { name: 'abordagem', widths: [380, 640, 760] },
   { name: 'blog', widths: [400, 640, 800] },
+  { name: 'psicoterapia', widths: [400, 640, 800] },
+  { name: 'autoconhecimento', widths: [400, 640, 800] },
 ];
 
 const QUALITY = { avif: 55, webp: 74, jpg: 78 };

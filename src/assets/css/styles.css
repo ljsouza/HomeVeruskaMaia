@@ -317,12 +317,6 @@ h1, h2, h3 { font-weight: 500; }
 .post:hover { border-color: rgba(201, 169, 110, .3); }
 .post__media { height: 220px; position: relative; overflow: hidden; }
 .post__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-.post__media--a { background: linear-gradient(135deg, #141C30 0%, #1A2848 100%); }
-.post__media--c { background: linear-gradient(135deg, #16181E 0%, #1E2038 100%); }
-.post__pattern {
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(135deg, transparent 0, transparent 28px, rgba(201, 169, 110, .025) 28px, rgba(201, 169, 110, .025) 29px);
-}
 .post__scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(14, 22, 40, .85) 0%, transparent 55%); }
 .tag {
   position: absolute; bottom: 16px; left: 16px; font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
