@@ -1,6 +1,6 @@
 /* Dados e componentes compartilhados entre as páginas do site. */
 
-export const SITE_URL = 'https://psicoafetiva.com.br';
+export const SITE_URL = 'https://psicologaveruskamartins.com.br';
 export const BRAND = 'Veruska Martins Maia';
 export const CRP = '08/09957';
 

@@ -1,6 +1,6 @@
-# Plano de Deployment — psicoafetiva.com.br
+# Plano de Deployment — psicologaveruskamartins.com.br
 **Projeto:** Site da Psicóloga Veruska Martins Maia  
-**Domínio:** psicoafetiva.com.br (registro.br)  
+**Domínio:** psicologaveruskamartins.com.br (registro.br)  
 **Hospedagem:** Cloudflare Pages  
 **Data:** Julho 2026  
 
@@ -71,14 +71,14 @@ Acessar `https://psicoafetiva.pages.dev` e confirmar que o site carrega corretam
 
 ---
 
-## Passo 3 — Conectar o Domínio psicoafetiva.com.br
+## Passo 3 — Conectar o Domínio psicologaveruskamartins.com.br
 
 ### 3.1 Adicionar domínio ao Cloudflare
 ```
 Cloudflare Dashboard
   → Websites
   → Add a site
-  → Digite: psicoafetiva.com.br
+  → Digite: psicologaveruskamartins.com.br
   → Plano: Free
   → Continue
 ```
@@ -93,7 +93,7 @@ ns2.cloudflare.com
 ### 3.2 Alterar nameservers no registro.br
 - Acesse: https://registro.br
 - Login com CPF/CNPJ do titular
-- Meus Domínios → `psicoafetiva.com.br` → Editar
+- Meus Domínios → `psicologaveruskamartins.com.br` → Editar
 - Em **Servidores DNS**, substituir pelos nameservers fornecidos pelo Cloudflare
 - Salvar
 
@@ -106,14 +106,14 @@ Cloudflare Dashboard
   → psicoafetiva (seu projeto)
   → Custom domains
   → Set up a custom domain
-  → Digite: psicoafetiva.com.br
+  → Digite: psicologaveruskamartins.com.br
   → Continue
 ```
 
 Repetir para o subdomínio www:
 ```
   → Set up a custom domain
-  → Digite: www.psicoafetiva.com.br
+  → Digite: www.psicologaveruskamartins.com.br
 ```
 
 O Cloudflare vai criar automaticamente os registros DNS necessários (CNAME apontando para `psicoafetiva.pages.dev`).
@@ -123,12 +123,12 @@ O Cloudflare vai criar automaticamente os registros DNS necessários (CNAME apon
 ## Passo 4 — Configurar Redirecionamentos
 
 ### 4.1 www → raiz (ou raiz → www)
-Recomendado: `www.psicoafetiva.com.br` redireciona para `psicoafetiva.com.br` (sem www).
+Recomendado: `www.psicologaveruskamartins.com.br` redireciona para `psicologaveruskamartins.com.br` (sem www).
 
 Criar arquivo `_redirects` na raiz do projeto:
 ```
 # _redirects
-https://www.psicoafetiva.com.br/* https://psicoafetiva.com.br/:splat 301
+https://www.psicologaveruskamartins.com.br/* https://psicologaveruskamartins.com.br/:splat 301
 ```
 
 Fazer novo upload incluindo este arquivo na pasta raiz junto com `index.html`.
@@ -147,7 +147,7 @@ Após confirmar o domínio final, atualizar a meta tag canonical no `index.html`
 <link rel="canonical" href="https://psiveruska.com.br/">
 
 <!-- Substituir por: -->
-<link rel="canonical" href="https://psicoafetiva.com.br/">
+<link rel="canonical" href="https://psicologaveruskamartins.com.br/">
 ```
 
 Também atualizar a meta `og:url` se existir.
@@ -159,7 +159,7 @@ Também atualizar a meta `og:url` se existir.
 Após publicação, ativar no painel:
 
 ```
-Cloudflare Dashboard → psicoafetiva.com.br → Speed → Optimization
+Cloudflare Dashboard → psicologaveruskamartins.com.br → Speed → Optimization
 ```
 
 | Configuração | Ação |
@@ -184,8 +184,8 @@ Criar regra para imagens com TTL longo (ex.: 30 dias):
 
 Após publicação completa, verificar:
 
-- [ ] Site abre em `https://psicoafetiva.com.br` sem erros
-- [ ] Site abre em `https://www.psicoafetiva.com.br` e redireciona para sem-www
+- [ ] Site abre em `https://psicologaveruskamartins.com.br` sem erros
+- [ ] Site abre em `https://www.psicologaveruskamartins.com.br` e redireciona para sem-www
 - [ ] Cadeado HTTPS verde no navegador
 - [ ] Todas as 4 imagens carregam corretamente
 - [ ] Botões de WhatsApp abrem a conversa com mensagem pré-preenchida
@@ -208,7 +208,7 @@ Após publicação completa, verificar:
 | Plataforma online | Google Meet |
 | WhatsApp | (44) 98821-8241 |
 | Instagram | @psiveruska |
-| Domínio | psicoafetiva.com.br |
+| Domínio | psicologaveruskamartins.com.br |
 
 ---
 

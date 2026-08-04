@@ -1,4 +1,4 @@
-# psicoafetiva.com.br — Veruska Martins Maia
+# psicologaveruskamartins.com.br — Veruska Martins Maia
 
 Site institucional estático da psicóloga e psicanalista Veruska Martins Maia
 (CRP 08/9957). HTML/CSS/JS puro, sem framework, com build de otimização em
@@ -58,7 +58,7 @@ Repositório: `github.com/ljsouza/HomeVeruskaMaia`
    - **Build output directory:** `dist`
    - **Node version:** 20 ou superior (variável `NODE_VERSION=20` se necessário)
 3. Deploy. Cada `git push` na branch `main` republica automaticamente.
-4. **Custom domains:** adicionar `psicoafetiva.com.br` e `www.psicoafetiva.com.br`
+4. **Custom domains:** adicionar `psicologaveruskamartins.com.br` e `www.psicologaveruskamartins.com.br`
    (o `www` → raiz é feito por uma Redirect Rule no nível da zona, pois o
    `_redirects` do Cloudflare não redireciona por hostname).
 

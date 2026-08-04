@@ -2,7 +2,7 @@
   "name": "psicoafetiva",
   "version": "1.0.0",
   "private": true,
-  "description": "Site institucional da psicóloga Veruska Martins Maia — psicoafetiva.com.br",
+  "description": "Site institucional da psicóloga Veruska Martins Maia — psicologaveruskamartins.com.br",
   "type": "module",
   "scripts": {
     "build:images": "node scripts/optimize-images.mjs",
