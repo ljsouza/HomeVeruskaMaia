@@ -43,6 +43,7 @@ export function nav(active = '') {
     <nav class="nav-links" id="nav-links" aria-label="Navegação principal">
       ${link('/', 'Início', 'home')}
       ${link('/veruska/', 'Veruska', 'veruska')}
+      ${link('/para-compreender/', 'Para compreender', 'compreender')}
       ${link('/agendar/', 'Agendar consulta', 'agendar')}
     </nav>
   </header>`;
