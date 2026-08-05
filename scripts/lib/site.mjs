@@ -4,7 +4,7 @@ export const SITE_URL = 'https://psicologaveruskamartins.com.br';
 export const BRAND = 'Veruska Martins Maia';
 export const CRP = '08/09957';
 
-export const WHATSAPP = '5544988260081'; // 44 98826-0081
+export const WHATSAPP = '5544988218241'; // 44 98821-8241
 export const WA_TEXT = 'Ol%C3%A1%2C%20Veruska!%20Gostaria%20de%20agendar%20uma%20consulta.';
 export const WA_URL = `https://wa.me/${WHATSAPP}?text=${WA_TEXT}`;
 export const EMAIL = 'psicologaveruskamartins@gmail.com';
@@ -70,7 +70,7 @@ export function footer() {
       </nav>
       <div class="footer__col">
         <span class="footer__label">Contato</span>
-        <a href="${WA_URL}" target="_blank" rel="noopener">${ICON.whatsapp} WhatsApp (44) 98826-0081</a>
+        <a href="${WA_URL}" target="_blank" rel="noopener">${ICON.whatsapp} WhatsApp (44) 98821-8241</a>
         <a href="mailto:${EMAIL}">${EMAIL}</a>
         <a href="${INSTAGRAM}" target="_blank" rel="noopener">${ICON.instagram} @psiveruska</a>
       </div>
@@ -98,7 +98,7 @@ export function businessJsonLd() {
     description: 'Psicóloga clínica (CRP 08/09957) com mais de 20 anos de experiência. Atendimento psicológico para adultos, presencial em Maringá/PR e online para todo o Brasil.',
     url: SITE_URL + '/',
     image: SITE_URL + '/assets/img/og-image.jpg',
-    telephone: '+55-44-98826-0081',
+    telephone: '+55-44-98821-8241',
     email: EMAIL,
     priceRange: '$$',
     address: {
