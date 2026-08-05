@@ -613,11 +613,6 @@ h1, h2, h3 { font-weight: 500; }
 .hub-head__wrap p { font-size: 17px; line-height: 1.8; color: var(--text-soft); font-weight: 300; max-width: 560px; text-wrap: pretty; }
 .hub { padding: 56px var(--pad-x) 110px; }
 .hub__grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.post__media--grad { background: linear-gradient(140deg, #141C30 0%, #1A2848 100%); }
-.post__media--grad::after {
-  content: ''; position: absolute; inset: 0;
-  background: repeating-linear-gradient(135deg, transparent 0, transparent 26px, rgba(201, 169, 110, .03) 26px, rgba(201, 169, 110, .03) 27px);
-}
 
 /* ---- Página de artigo -------------------------------------------------- */
 .article-hero { padding: 140px var(--pad-x) 0; }

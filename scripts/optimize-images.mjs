@@ -7,6 +7,7 @@ import sharp from 'sharp';
 import { mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { ARTICLES } from './lib/articles.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -21,6 +22,9 @@ const IMAGES = [
   { name: 'blog', widths: [400, 640, 800] },
   { name: 'psicoterapia', widths: [400, 640, 800] },
   { name: 'autoconhecimento', widths: [400, 640, 800] },
+  // Capas dos artigos do blog (uma por artigo): servem os cards do hub e o
+  // banner do topo de cada artigo.
+  ...ARTICLES.map((a) => ({ name: `art-${a.file}`, widths: [420, 760, 1200] })),
 ];
 
 const QUALITY = { avif: 55, webp: 74, jpg: 78 };

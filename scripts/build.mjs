@@ -71,6 +71,19 @@ await sharp(heroCover)
   .toFile(join(DIST, 'assets', 'img', 'og-image.jpg'));
 console.log('✓ OG image gerada');
 
+/* ---- 3b. Capas dos artigos: dimensões intrínsecas + OG social --------- */
+const coverMeta = {};
+for (const a of ARTICLES) {
+  const src = join(ROOT, 'src-images', `art-${a.file}.jpg`);
+  const meta = await sharp(src).metadata();
+  coverMeta[a.file] = { width: meta.width, height: meta.height };
+  await sharp(src)
+    .resize(ogW, ogH, { fit: 'cover', position: 'attention' })
+    .jpeg({ quality: 80, mozjpeg: true })
+    .toFile(join(DIST, 'assets', 'img', `art-${a.file}-og.jpg`));
+}
+console.log('✓ Capas dos artigos: OG social gerado');
+
 /* ---- 4. Layout compartilhado ----------------------------------------- */
 function minifyCss(css) {
   return css
@@ -84,7 +97,7 @@ function minifyCss(css) {
 const css = minifyCss(await readFile(join(SRC, 'assets', 'css', 'styles.css'), 'utf8'));
 const js = await readFile(join(SRC, 'assets', 'js', 'main.js'), 'utf8');
 
-function layout({ title, description, path, active, jsonld, bodyClass = '', extraHead = '', main }) {
+function layout({ title, description, path, active, jsonld, bodyClass = '', extraHead = '', main, ogImage = `${SITE_URL}/assets/img/og-image.jpg` }) {
   const canonical = SITE_URL + path;
   const ld = Array.isArray(jsonld) ? jsonld : [jsonld];
   const ldScripts = ld.filter(Boolean)
@@ -106,13 +119,13 @@ function layout({ title, description, path, active, jsonld, bodyClass = '', extr
   <meta property="og:description" content="${description}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:image" content="${SITE_URL}/assets/img/og-image.jpg">
+  <meta property="og:image" content="${ogImage}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
-  <meta name="twitter:image" content="${SITE_URL}/assets/img/og-image.jpg">
+  <meta name="twitter:image" content="${ogImage}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -188,6 +201,9 @@ function articleMain(a, body) {
         <h1>${esc(a.title)}</h1>
         <p class="article-hero__summary">${esc(a.summary)}</p>
       </div>
+      <figure class="article-figure">
+      ${articleCover(a, { sizes: '(max-width: 820px) calc(100vw - 48px), min(980px, calc(100vw - 144px))', eager: true })}
+      </figure>
       <blockquote class="article-quote">${esc(a.quote)}</blockquote>
     </header>
     <div class="article-body">
@@ -204,7 +220,7 @@ function articleJsonLd(a) {
     {
       '@context': 'https://schema.org', '@type': 'Article',
       headline: a.title, description: a.description, articleSection: a.category,
-      inLanguage: 'pt-BR', mainEntityOfPage: url, image: `${SITE_URL}/assets/img/og-image.jpg`,
+      inLanguage: 'pt-BR', mainEntityOfPage: url, image: `${SITE_URL}/assets/img/art-${a.file}-og.jpg`,
       author: { '@type': 'Person', name: BRAND, url: `${SITE_URL}/veruska/` },
       publisher: { '@type': 'Person', name: BRAND },
     },
@@ -219,9 +235,37 @@ function articleJsonLd(a) {
   ];
 }
 
+// Texto alternativo descritivo de cada capa (acessibilidade + SEO).
+const COVER_ALT = {
+  relacionamentos: 'Mulher pensativa em meio a um encontro social ao redor de uma mesa',
+  ansiedade: 'Mulher sentada na beira da cama, cabeça apoiada na mão, em inquietação',
+  luto: 'Pessoa caminhando por uma trilha na floresta em direção à luz do entardecer',
+  depressao: 'Mulher sentada no chão ao lado da cama, cabeça baixa, em um quarto silencioso',
+  autoestima: 'Mulher cercada por bilhetes com cobranças como “seja forte” e “seja perfeita”',
+  reconstrucao: 'Mulher diante de um espelho, olhando com serenidade para o próprio reflexo',
+};
+
+// <picture> responsivo (AVIF/WebP/JPG) da capa de um artigo.
+function articleCover(a, { sizes, eager = false, className = '' }) {
+  const base = `/assets/img/art-${a.file}`;
+  const ws = [420, 760, 1200];
+  const set = (ext) => ws.map((w) => `${base}-${w}.${ext} ${w}w`).join(', ');
+  const m = coverMeta[a.file] || { width: 1600, height: 900 };
+  const alt = COVER_ALT[a.file] || a.title;
+  return `<picture${className ? ` class="${className}"` : ''}>
+      <source type="image/avif" srcset="${set('avif')}" sizes="${sizes}">
+      <source type="image/webp" srcset="${set('webp')}" sizes="${sizes}">
+      <img src="${base}-760.jpg" srcset="${set('jpg')}" sizes="${sizes}" alt="${esc(alt)}" width="${m.width}" height="${m.height}" ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+    </picture>`;
+}
+
 function hubCard(a) {
   return `<a class="post" href="/${a.slug}/">
-    <div class="post__media post__media--grad"><span class="tag">${a.category}</span></div>
+    <div class="post__media">
+      ${articleCover(a, { sizes: '(max-width: 820px) calc(100vw - 48px), (max-width: 1024px) 45vw, 380px' })}
+      <div class="post__scrim"></div>
+      <span class="tag">${a.category}</span>
+    </div>
     <div class="post__body">
       <h3 class="post__title">${esc(a.title)}</h3>
       <p class="post__excerpt">${esc(a.summary)}</p>
@@ -308,6 +352,7 @@ for (const a of ARTICLES) {
   const body = await readFile(join(SRC, 'pages', 'artigos', `${a.file}.html`), 'utf8');
   const html = clean(layout({
     title: a.seoTitle, description: a.description, path: `/${a.slug}/`, active: 'compreender',
+    ogImage: `${SITE_URL}/assets/img/art-${a.file}-og.jpg`,
     jsonld: articleJsonLd(a), main: articleMain(a, body.trim()),
   }));
   await mkdir(join(DIST, a.slug), { recursive: true });
