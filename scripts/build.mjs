@@ -259,10 +259,21 @@ function articleCover(a, { sizes, eager = false, className = '' }) {
     </picture>`;
 }
 
-function hubCard(a) {
+// Tamanhos renderizados dos cards do hub (usado no <picture> e no preload do 1º).
+const CARD_SIZES = '(max-width: 820px) calc(100vw - 48px), (max-width: 1024px) 45vw, 380px';
+
+// Preload responsivo da capa do 1º card (é o elemento LCP no mobile).
+function firstCardPreload(a) {
+  const base = `/assets/img/art-${a.file}`;
+  const ws = [420, 760, 1200];
+  const srcset = ws.map((w) => `${base}-${w}.avif ${w}w`).join(', ');
+  return `<link rel="preload" as="image" type="image/avif" href="${base}-420.avif" imagesrcset="${srcset}" imagesizes="${CARD_SIZES}" fetchpriority="high">`;
+}
+
+function hubCard(a, i = 0) {
   return `<a class="post" href="/${a.slug}/">
     <div class="post__media">
-      ${articleCover(a, { sizes: '(max-width: 820px) calc(100vw - 48px), (max-width: 1024px) 45vw, 380px' })}
+      ${articleCover(a, { sizes: CARD_SIZES, eager: i === 0 })}
       <div class="post__scrim"></div>
       <span class="tag">${a.category}</span>
     </div>
@@ -333,12 +344,13 @@ for (const p of PAGES) {
 
 /* Hub "Para compreender" */
 const hubFragment = fill(await readFile(join(SRC, 'pages', 'compreender.html'), 'utf8'))
-  .replace('%ARTICLE_CARDS%', ARTICLES.map(hubCard).join('\n'));
+  .replace('%ARTICLE_CARDS%', ARTICLES.map((a, i) => hubCard(a, i)).join('\n'));
 await mkdir(join(DIST, 'para-compreender'), { recursive: true });
 await writeFile(join(DIST, 'para-compreender', 'index.html'), clean(layout({
   title: 'Para compreender — Textos sobre relacionamentos, ansiedade, luto e autoconhecimento',
   description: 'Reflexões da psicóloga Veruska Martins sobre relacionamentos, ansiedade, luto, depressão, autoestima e reconstrução de si. Um espaço para compreender a própria história.',
   path: '/para-compreender/', active: 'compreender',
+  extraHead: firstCardPreload(ARTICLES[0]),
   jsonld: [{
     '@context': 'https://schema.org', '@type': 'Blog', name: 'Para compreender',
     url: `${SITE_URL}/para-compreender/`, inLanguage: 'pt-BR',
