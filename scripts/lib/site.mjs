@@ -11,7 +11,7 @@ export const EMAIL = 'psicologaveruskamartins@gmail.com';
 // Chave do Web3Forms (deixar vazio até gerar em web3forms.com com o e-mail acima).
 // Enquanto vazia, o formulário faz fallback para o WhatsApp automaticamente.
 export const WEB3FORMS_KEY = '';
-export const INSTAGRAM = 'https://www.instagram.com/psiveruska';
+export const INSTAGRAM = 'https://www.instagram.com/psicologaveruskamartins';
 export const ADDRESS = {
   street: 'Rua Neo Alves Martins, 2999 — Sala 124',
   district: 'Zona 1',
@@ -72,7 +72,7 @@ export function footer() {
         <span class="footer__label">Contato</span>
         <a href="${WA_URL}" target="_blank" rel="noopener">${ICON.whatsapp} WhatsApp (44) 98821-8241</a>
         <a href="mailto:${EMAIL}">${EMAIL}</a>
-        <a href="${INSTAGRAM}" target="_blank" rel="noopener">${ICON.instagram} @psiveruska</a>
+        <a href="${INSTAGRAM}" target="_blank" rel="noopener">${ICON.instagram} @psicologaveruskamartins</a>
       </div>
     </div>
     <div class="footer__bottom">
